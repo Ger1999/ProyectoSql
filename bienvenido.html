@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Certus - Subida de Documentos</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h2>Bienvenido a la Plataforma</h2>
+    <p class="subtitulo">Sube tus documentos requeridos</p>
+
+    <form id="form-subida" action="/subir-documentos" method="POST" enctype="multipart/form-data">
+      <label for="dni">DNI (PDF o Imagen):</label>
+      <input type="file" name="dni" accept=".pdf,.jpg,.jpeg,.png" required>
+
+      <label for="certificado">Certificado de Estudios:</label>
+      <input type="file" name="certificado" accept=".pdf,.jpg,.jpeg,.png" required>
+
+      <label for="fotocarnet">Foto Carnet:</label>
+      <input type="file" name="fotocarnet" accept=".pdf,.jpg,.jpeg,.png" required>
+
+      <button type="submit">Subir Documentos</button>
+    </form>
+
+    <div id="mensaje-subida" style="margin-top: 20px;"></div>
+
+    <div id="opciones">
+  <a href="/logout" class="boton-salida"> Cerrar sesión</a>
+</div>
+
+<script>
+  let usuarioActual = "";
+
+  // Primero obtenemos el usuario logueado
+  fetch('/usuario-logueado')
+    .then(res => res.json())
+    .then(data => {
+      usuarioActual = data.usuario;
+
+      // Si es Fernanda, ocultar el formulario
+      if (usuarioActual === 'Fernanda@certus.edu.pe') {
+        const btn = document.createElement('button');
+        btn.textContent = ' Ver y Descargar Documentos';
+        btn.onclick = () => window.location.href = '/ver-documentos';
+        document.getElementById('opciones').appendChild(btn);
+      }
+    });
+
+  // Escuchar el submit del formulario
+   document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('form-subida');
+    const mensajeDiv = document.getElementById('mensaje-subida');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault(); //Evita que se recargue la página
+
+      //if (usuarioActual === 'Fernanda@certus.edu.pe') {
+        //mensajeDiv.innerHTML = '<p style="color:red;">Este usuario no puede subir documentos.</p>';
+        //return;
+      //}
+
+      const formData = new FormData(form);
+
+      try {
+        const res = await fetch('/subir-documentos', {
+          method: 'POST',
+          body: formData
+        });
+
+        const texto = await res.text();
+        mensajeDiv.innerHTML = `<div style="color: green; margin-top: 15px;">${texto}</div>`;
+      } catch (err) {
+        mensajeDiv.innerHTML = '<p style="color: red;"> Error al subir los documentos.</p>';
+      }
+    });
+  });
+</script>
+
+<style>
+    body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f6f9;
+  margin: 0;
+  padding: 20px;
+}
+
+h2 {
+  text-align: center;
+  color: #2c3e50;
+}
+
+.doc-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.documento {
+  background: white;
+  border: 1px solid #dcdde1;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.documento strong {
+  font-size: 16px;
+  color: #34495e;
+}
+
+.documento .contenido {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  margin-top: 15px;
+}
+
+.documento .contenido div {
+  flex: 1 1 30%;
+}
+
+iframe {
+  border: 1px solid #bdc3c7;
+  border-radius: 5px;
+}
+
+a.descargar {
+  display: inline-block;
+  margin-top: 8px;
+  text-decoration: none;
+  background-color: #3498db;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+a.descargar:hover {
+  background-color: #2980b9;
+}
+
+.boton-salida {
+  display: inline-block;
+  margin: 10px auto;
+  background-color: #e74c3c;
+  color: white;
+  padding: 10px 18px;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 15px;
+  text-align: center;
+}
+
+.boton-salida:hover {
+  background-color: #c0392b;
+}
+
+  </style>
+</body>
+</html>
+
+
+
+

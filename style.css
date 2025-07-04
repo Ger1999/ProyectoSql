@@ -1,0 +1,140 @@
+/* Estilos generales */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f8f9fa;
+  margin: 0;
+  padding: 0;
+  color: #333;
+}
+
+.formulario-login {
+  text-align: center;
+}
+
+/* Contenedor principal */
+.container {
+  
+  max-width: 1000px;
+  margin: 60px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Títulos */
+h2 {
+  color: #004080;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.subtitulo {
+  text-align: center;
+  font-size: 1.1em;
+  margin-bottom: 30px;
+  color: #666;
+}
+
+/* Formularios */
+form label {
+  display: block;
+  margin: 15px 0 5px;
+  font-weight: bold;
+}
+
+input[type="file"] {
+  width: 100%;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: #fafafa;
+}
+
+.entrar{
+  margin-top: 30px;
+}
+button {
+  background-color: #004080;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1em;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  display: inline-block;
+}
+
+button:hover {
+  background-color: #0066cc;
+}
+
+/* Vista de documentos (para Fernanda) */
+iframe {
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+a {
+  color: #004080;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Bloques de documentos */
+.doc-card {
+  padding: 15px;
+  margin-bottom: 25px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+/* Botón de cerrar sesión */
+.logout-btn {
+  margin-bottom: 20px;
+  padding: 10px 18px;
+  background-color: #c62828;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+
+.logout-btn:hover {
+  background-color: #b71c1c;
+}
+
+.doc-previews {
+  gap: 25px;
+  margin-top: 15px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .container {
+    margin: 20px;
+    padding: 20px;
+  }
+
+  iframe {
+    width: 100% !important;
+    height: 300px;
+  }
+
+  .logout-btn {
+    float: none;
+    width: 100%;
+    margin-top: 20px;
+  }
+}
+
+
+
